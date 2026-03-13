@@ -1,5 +1,5 @@
 from client import DebugClient
-import UAV_Computer_Vision.field_detection as fd
+# import UAV_Computer_Vision.field_detection as fd
 
 from PIL import Image
 import logging
@@ -47,19 +47,20 @@ handlers
 
 
 def handle_camera(client: DebugClient):
-    opencv_image = receive_image(client)
-    image_downscaled = downscale_image(opencv_image)
-
-    computer_vision_result = fd.recompute_display(
-        image_downscaled, opencv_image)
-    cv.imwrite(output_image_file, computer_vision_result)
-
-    logging.info(f"Image saved to {output_image_file}")
-
-    duck_points = fd.get_duck_points(opencv_image)
-    field_corners = fd.get_field_corner_points(opencv_image)
-
-    logging.info(f"Duck points: {duck_points}\n Field corners: {field_corners}")
+    # opencv_image = receive_image(client)
+    # image_downscaled = downscale_image(opencv_image)
+    #
+    # computer_vision_result = fd.recompute_display(
+    #     image_downscaled, opencv_image)
+    # cv.imwrite(output_image_file, computer_vision_result)
+    #
+    # logging.info(f"Image saved to {output_image_file}")
+    #
+    # duck_points = fd.get_duck_points(opencv_image)
+    # field_corners = fd.get_field_corner_points(opencv_image)
+    #
+    # logging.info(f"Duck points: {duck_points}\n Field corners: {field_corners}")
+    pass
 
 
 def handle_launch(client: DebugClient):
@@ -211,4 +212,4 @@ def handle_pos_vel(client: DebugClient):
 def handle_gyro_angle(client: DebugClient):
     roll, pitch, yaw, roll_rate, pitch_rate, yaw_rate, acc_x, acc_y, acc_z = struct.unpack("<fffffffff", client.receive_n_bytes(36))
 
-    logging.info(f"Pitch, Yaw, Roll: ({roll}, {pitch}, {yaw})\nRoll, Pitch, Yaw (Rate): ({roll_rate}, {pitch_rate}, {yaw_rate})\nAcc X, Acc Y, Acc Z: ({acc_x}, {acc_y}, {acc_z})")
+    logging.info(f"Roll, Pitch, Yaw (Degs) ({roll}, {pitch}, {yaw})\nRoll, Pitch, Yaw (Rate): ({roll_rate}, {pitch_rate}, {yaw_rate})\nAcc X, Acc Y, Acc Z: ({acc_x}, {acc_y}, {acc_z})")
