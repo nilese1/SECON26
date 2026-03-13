@@ -2,4 +2,4 @@
 
 #include "../../../core/robot-core.h"
 
-void crank_task();
+status_t button_task(void);
